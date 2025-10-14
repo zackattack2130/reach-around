@@ -1,0 +1,5 @@
+config SHIELD_REACHSPLIT_LEFT
+    def_bool $(shields_list_contains,reachsplit_left)
+
+config SHIELD_REACHSPLIT_RIGHT
+    def_bool $(shields_list_contains,reachsplit_right)
