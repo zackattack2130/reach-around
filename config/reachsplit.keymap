@@ -20,7 +20,7 @@
         layer_1 {
             display-name = "Layer 1";
             bindings = <
-    /* R0 */ &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp MINUS  &kp EQUAL  &trans
+    /* R0 */ &BT_CLR  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp MINUS  &kp EQUAL  &trans
     /* R1 */ &trans  &trans  &kp UP  &trans  &trans  &kp RET  &trans  &trans  &trans  &trans  &trans  &trans
     /* R2 */ &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
     /* R3 */ &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
