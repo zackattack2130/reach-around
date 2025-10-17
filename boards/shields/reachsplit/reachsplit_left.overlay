@@ -1,6 +1,9 @@
+/* left half: keep your existing matrix + add a single 128x64 OLED */
+
 #include "reachsplit.dtsi"
 
-/ {
+ / {
+    /* --- your existing matrix from the screenshot --- */
     kscan0: kscan0 {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
@@ -8,11 +11,11 @@
 
         col-gpios
             = <&pro_micro 10 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 9 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 8 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 9  GPIO_ACTIVE_HIGH>
+            , <&pro_micro 8  GPIO_ACTIVE_HIGH>
             , <&pro_micro 16 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 6 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 5 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 6  GPIO_ACTIVE_HIGH>
+            , <&pro_micro 5  GPIO_ACTIVE_HIGH>
             ;
 
         row-gpios
@@ -23,8 +26,29 @@
             , <&pro_micro 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             ;
     };
+
+    /* --- new: single SSD1306 128x64 OLED on I2C0 (SDA=P0.26, SCL=P0.27) --- */
+    &i2c0 {
+        status = "okay";
+        clock-frequency = <I2C_BITRATE_STANDARD>; /* 100 kHz (safe). 400 kHz also fine. */
+
+        oled0_64: ssd1306@3c {
+            compatible = "solomon,ssd1306fb";
+            reg = <0x3c>;              /* change to <0x3d> if your module is jumpered to 0x3D */
+            label = "SSD1306_64";
+            width = <128>;
+            height = <64>;
+            segment-offset = <0>;
+            page-offset = <0>;
+            display-offset = <0>;
+        };
+    };
 };
 
+/* tie the physical layout to your kscan (unchanged) */
+&physical_layout_reachsplit {
+    kscan = &kscan0;
+};
 &physical_layout_reachsplit {
     kscan = <&kscan0>;
 };
